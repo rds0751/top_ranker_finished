@@ -1,0 +1,41 @@
+#id_username-error {
+	color: #E00;
+	font-size: 1.1em;
+	margin-top: 5px;
+	opacity: 0;
+}
+
+#id_username-ok {
+	color: #0E0;
+	font-size: 1.1em;
+	margin-top: 5px;
+	opacity: 0;
+}
+
+#id_first_name-error {
+	color: #E00;
+	font-size: 1.1em;
+	margin-top: 5px;
+	opacity: 0;
+}
+
+#id_first_name-ok {
+	color: #0E0;
+	font-size: 1.1em;
+	margin-top: 5px;
+	opacity: 0;
+}
+
+#id_last_name-error {
+	color: #E00;
+	font-size: 1.1em;
+	margin-top: 5px;
+	opacity: 0;
+}
+
+#id_last_name-ok {
+	color: #0E0;
+	font-size: 1.1em;
+	margin-top: 5px;
+	opacity: 0;
+}

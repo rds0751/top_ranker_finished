@@ -1,0 +1,75 @@
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register Form</title>
+<link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/Google-Style-Login.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/validate.css' %}">
+<div class="login-card"><img src="{% static 'assets/img/avatar_2x_new.png' %}" class="profile-img-card">
+	<p class="profile-name-card"> </p>
+	<form class="form-signin" method="POST"><span class="reauth-email"> </span>
+		{%csrf_token%}
+		<div class="form-group">
+			{{form.username}}
+			<!--<input class="form-control" type="text" required="" placeholder="Username" autofocus="" id="inputEmail">-->
+			<span id="id_username-error" class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span id="id_username-ok" class="glyphicon glyphicon-ok form-control-feedback"></span>
+		</div>
+		<div class="form-group">
+			{{form.first_name}}
+			<!--<input class="form-control" type="text" required="" placeholder="First Name" autofocus="" id="inputEmail">-->
+			<span id="id_first_name-error" class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span id="id_first_name-ok" class="glyphicon glyphicon-ok form-control-feedback"></span>
+		</div>
+		<div class="form-group">
+			{{form.last_name}}
+			<!--<input class="form-control" type="text" required="" placeholder="Last Name" autofocus="" id="inputEmail">-->
+			<span id="id_last_name-error" class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span id="id_last_name-ok" class="glyphicon glyphicon-ok form-control-feedback"></span>
+		</div>
+		<div class="form-group">
+			{{form.email}}
+			<!--<input class="form-control" type="email" required="" placeholder="Email address" autofocus="" id="inputEmail"><br>-->
+			<span id="id_email-error" class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span id="id_email-ok" class="glyphicon glyphicon-ok form-control-feedback"></span>
+		</div>
+		<div class="form-group">
+			{{form.password1}}
+			<!--<input class="form-control" type="password" required="" placeholder="Password" id="inputPassword">-->
+			<span id="id_password1-error" class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span id="id_password1-ok" class="glyphicon glyphicon-ok form-control-feedback"></span>
+		</div>
+		<div class="form-group">
+			{{form.password2}}
+			<!--<input class="form-control" type="password" required="" placeholder="Confirm Password" id="inputPassword"><br>-->
+			<span id="id_password2-error" class="glyphicon glyphicon-remove form-control-feedback"></span>
+			<span id="id_password2-ok" class="glyphicon glyphicon-ok form-control-feedback"></span>
+		</div>
+		<button class="btn btn-primary btn-block btn-lg btn-signin" type="submit">Register</button>
+	</form>
+	Existing User? <a href="#" class="forgot-password">Login</a> Instead
+</div>
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/validate.min.js' %}"></script>
+<script>
+    $("#id_username").on('input',function () {
+      var username = $(this).val();
+      $.ajax({
+        url: '/ajax/validate_username/',
+        data: {
+          'username': username
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            console.log("Exists");
+          }
+          else {
+          	console.log('OK');
+          }
+        }
+      });
+
+    });
+  </script>

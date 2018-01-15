@@ -1,0 +1,49 @@
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+
+<head>
+    {% load static %}
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Untitled</title>
+	<link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}" >
+	<link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/Google-Style-Login.css' %}">
+</head>
+
+<body>
+	<div class="login-card"><img src="{% static 'assets/img/avatar_2x.png' %}" class="profile-img-card">
+		<p class="profile-name-card"> </p>
+		<form class="form-horizontal form" name="LoginForm"  method="post">
+    {% csrf_token %}
+    {% if next %}
+        <input type="hidden" name="next" value="{{ next }}" />
+    {% endif %}
+    <div class="control-group">
+        <label class="control-label" for="username">Username</label>
+        <div class="controls">
+            <input class="form-control" type="text" id="username" name="username"  placeholder="Username">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="password">Password</label>
+        <div class="controls">
+            <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+        </div>
+  </div><br>
+  <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn btn-primary btn-block btn-lg btn-signin">Login</button><a href="{% url 'signup' %}"> or sign up</a>
+        </div>
+    </div>
+    </form>
+		<a href="#" class="forgot-password">Forgot your password?</a>
+	</div>
+	<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+	<script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+
+<!--</html>-->
+<div  class="center-block" id="login" style="width: 40%;">
+
+</div>

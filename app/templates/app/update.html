@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/Google-Style-Login.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/validate.css' %}">
+</head>
+<body>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit"> Sub,it</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaderboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+	<link rel="stylesheet" href="{% static 'assets/fonts/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/Pretty-Footer.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/Pretty-Header.css' %}">
+</head>
+<body>
+<nav class="navbar navbar-default custom-header">
+		<div class="container-fluid">
+			<div class="navbar-header"><a class="navbar-brand navbar-link" href="#">Top<span>Ranker </span> </a>
+				<button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+			</div>
+			<div class="collapse navbar-collapse" id="navbar-collapse">
+				<ul class="nav navbar-nav links">
+					<li class="active" role="presentation"><a href="{% url 'dashboard'%}">Dashboard </a></li>
+					<li role="presentation"><a href="{% url 'problems'%}">Problems </a></li>
+					<li role="presentation"><a href="{% url 'contest'%}">Contest </a></li>
+					<li role="presentation"><a href="{% url 'leaderboard'%}">Leaderboard </a></li>
+					<li role="presentation"><a href="{% url 'contribute'%}">Contribute </a></li>
+					<li role="presentation"><a href="{% url 'statistics'%}">Statistics </a></li>
+					<li role="presentation"><a href="{% url 'discuss'%}">Discuss </a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+                        {% if user.is_authenticated %}
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#"> <span class="caret"></span> {{ user.username }}{% if user.userpro.image %} <img src="{{ user.userpro.image.url}}" class="dropdown-image" >{% endif %}</a>
+                        {% else %}
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#"> <span class="caret"></span></a>
+                        {% endif %}
+
+						<ul class="dropdown-menu dropdown-menu-right" role="menu">
+							<li role="presentation"><a href="#">Something 1 </a></li>
+							<li role="presentation"><a href="#">Something 2 </a></li>
+                            {% if user.is_authenticated %}
+							<li role="presentation" class="active"><a href="/logout/">Logout </a></li>
+                            <li role="presentation" class="active"><a href="">Change</a></li>
+                            {% else %}
+                            <li role="presentation" class="active"><a href="/login/">Signin </a></li>
+                            <li role="presentation" class="active"><a href="/signup/">Signup </a></li>
+                            {% endif %}
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!--Login-->
+	{% if user.is_authenticated %}
+	<div class="container-fluid" style="min-height: 65vh">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-10">
+					<h3>Leaderboard</h3>
+				</div>
+				<div class="col-md-2" style="text-align: right;">
+					<h4>Your Rank: <span style="color: #e00;">498</span></h4>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<ul class="nav nav-tabs nav-justified">
+			<li class="active"><a href="#">Top Ranker</a></li>
+			<li><a href="#">Contributor</a></li>
+			<li><a href="#">Country</a></li>
+			<li><a href="#">Institution</a></li>
+		</ul>
+		<table class="table table-custom table-bordered">
+			<thead>
+				<tr>
+					<th>Rank</th>
+					<th>CC</th>
+					<th>Name</th>
+					<th>Institution</th>
+					<th>Solved</th>
+					<th>Contributed</th>
+					<th>Score</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>USA</td>
+					<td>John Doe</td>
+					<td>ACM University</td>
+					<td>102</td>
+					<td>39</td>
+					<td>297</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>IND</td>
+					<td>Mary Moe</td>
+					<td>Thapar University</td>
+					<td>96</td>
+					<td>30</td>
+					<td>246</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>AUS</td>
+					<td>July Dooley</td>
+					<td>Ostrich International</td>
+					<td>91</td>
+					<td>29</td>
+					<td>236</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!--Without login-->
+	{% else %}
+	<div class="container-fluid" style="min-height: 65vh">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-10">
+					<h3>Leaderboard</h3>
+				</div>
+				<div class="col-md-2" style="text-align: right;">
+					<h4><a href="">Login</a> to find yourself on the board.</h4>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<ul class="nav nav-tabs nav-justified">
+			<li class="active"><a href="#">Top Ranker</a></li>
+			<li><a href="#">Contributor</a></li>
+			<li><a href="#">Country</a></li>
+			<li><a href="#">Institution</a></li>
+		</ul>
+		<table class="table table-custom table-bordered">
+			<thead>
+				<tr>
+					<th>Event ID</th>
+					<th>CC</th>
+					<th>Name</th>
+					<th>Organiser</th>
+					<th>Type</th>
+					<th colspan="2" style="text-align: center;">Start - End</th>
+					<th colspan="2">Prize</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>E302</td>
+					<td>IND</td>
+					<td>SocPros 2018</td>
+					<td>IIT Bhubaneswar</td>
+					<td>Conference</td>
+					<td>23 Dec 2017</td>
+					<td>25 Dec 2017</td>
+					<td>$1000</td>
+					<td><b><a href="">Participate</a></b></td>
+				</tr>
+				<tr>
+					<td>E301</td>
+					<td>IND</td>
+					<td>Thapar-EST</td>
+					<td>Thapar University</td>
+					<td>Class Test</td>
+					<td colspan="2" style="text-align: center;">NIL</td>
+					<td>Higher Grade</td>
+					<td><b><a href="">Participate</a></b></td>
+				</tr>
+				<tr>
+					<td>E300</td>
+					<td>IND</td>
+					<td>Thapar-MST</td>
+					<td>Thapar University</td>
+					<td>Class Test</td>
+					<td colspan="2" style="text-align: center;">NIL</td>
+					<td>Higher Grade</td>
+					<td><b><a href="">Participate</a></b></td>
+				</tr>
+				<tr>
+					<td>E299</td>
+					<td>CHI</td>
+					<td>China-Final</td>
+					<td>China University</td>
+					<td>Class Test</td>
+					<td colspan="2" style="text-align: center;">NIL</td>
+					<td>Higher Grade</td>
+					<td><b><a href="">Participate</a></b></td>
+				</tr>
+				<tr>
+					<td>E301</td>
+					<td>IND</td>
+					<td>Thapar-EST</td>
+					<td>Thapar University</td>
+					<td>Class Test</td>
+					<td colspan="2" style="text-align: center;">NIL</td>
+					<td>Higher Grade</td>
+					<td><b><a href="">Participate</a></b></td>
+				</tr>
+				<tr>
+					<td>E300</td>
+					<td>IND</td>
+					<td>Thapar-MST</td>
+					<td>Thapar University</td>
+					<td>Class Test</td>
+					<td colspan="2" style="text-align: center;">NIL</td>
+					<td>Higher Grade</td>
+					<td><b><a href="">Participate</a></b></td>
+				</tr>
+				<tr>
+					<td>E298</td>
+					<td>USA</td>
+					<td>None</td>
+					<td>None</td>
+					<td>Conference</td>
+					<td>None</td>
+					<td>None</td>
+					<td>$500</td>
+					<td><b><a href="">Participate</a></b></td>
+				</tr>
+				<tr>
+					<td>E297</td>
+					<td>UK</td>
+					<td>None</td>
+					<td>None</td>
+					<td>Conference</td>
+					<td>None</td>
+					<td>None</td>
+					<td>$300</td>
+					<td><b><a href="">Participate</a></b></td>
+				</tr>
+				<tr>
+					<td>E299</td>
+					<td>CHI</td>
+					<td>China-Final</td>
+					<td>China University</td>
+					<td>Class Test</td>
+					<td colspan="2" style="text-align: center;">NIL</td>
+					<td>Higher Grade</td>
+					<td><b><a href="">Participate</a></b></td>
+				</tr>
+				<tr>
+					<td>E298</td>
+					<td>USA</td>
+					<td>None</td>
+					<td>None</td>
+					<td>Conference</td>
+					<td>None</td>
+					<td>None</td>
+					<td>$500</td>
+					<td><b><a href="">Participate</a></b></td>
+				</tr>
+				<tr>
+					<td>E296</td>
+					<td>ISR</td>
+					<td>None</td>
+					<td>None</td>
+					<td>Conference</td>
+					<td>None</td>
+					<td>None</td>
+					<td>$100</td>
+					<td><b><a href="">Participate</a></b></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+{% endif %}
+	<footer>
+		<div class="row">
+			<div class="col-md-4 col-sm-6 footer-navigation">
+				<h3><a href="#">Top<span>Ranker</span></a></h3>
+				<div class="social-links social-icons"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i class="fa fa-github"></i></a></div>
+				<p class="company-name">Top Ranker © 2015 | All rights reserved</p>
+			</div>
+			<div class="col-md-4 footer-about">
+				<h4>Heading 1</h4>
+				<p class="col-xs-6">Company<br>Resources<br>Developers<br>Support<br>More<br></p>
+				<p class="col-xs-6">Company<br>Resources<br>Developers<br>Support<br>More<br></p>
+			</div>
+			<div class="clearfix visible-sm-block"></div>
+			<div class="col-md-4 footer-about">
+				<h4>Heading 2</h4>
+				<p class="col-xs-6">Company<br>Resources<br>Developers<br>Support<br>More<br></p>
+				<p class="col-xs-6">Company<br>Resources<br>Developers<br>Support<br>More<br></p>
+			</div>
+		</div>
+	</footer>
+
+	<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+	<script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>
